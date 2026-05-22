@@ -1,14 +1,9 @@
-def call(String composePath = '.') {
+def call() {
 
-    stage('Deploy Container') {
+    sh """
+    export IMAGE_TAG=${env.IMAGE_TAG}
 
-        sh """
-        export IMAGE_TAG=${env.IMAGE_TAG}
-
-        cd ${composePath}
-
-        docker compose down || true
-        docker compose up -d
-        """
-    }
+    docker compose down || true
+    docker compose up -d
+    """
 }
